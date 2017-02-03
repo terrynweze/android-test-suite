@@ -34,7 +34,6 @@ public class Element {
     }
 
     public Element clickElement(final By locator) {
-        // Build logging message from options
         try {
             new WebDriverWait(ad.driver(), globalSeTimeOut)
                     .ignoring(Throwable.class)

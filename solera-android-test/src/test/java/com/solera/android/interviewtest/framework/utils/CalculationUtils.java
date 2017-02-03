@@ -8,6 +8,11 @@ import org.openqa.selenium.By;
 import com.solera.android.interviewtest.framework.ApDriver;
 import com.solera.android.interviewtest.framework.pageobjects.BasePageObject;
 
+/**
+ * @author terry.nweze
+ *
+ * A utility class used to assist with interaction with the calculator.
+ */
 public class CalculationUtils {
 	public static final int ADD_OPERATOR = 0;
 	public static final int SUB_OPERATOR = 1;
@@ -22,6 +27,11 @@ public class CalculationUtils {
 	private ApDriver ad;
 	
 	
+	/**
+	 * @param ad
+	 * 		ApDriver required for use in other methods
+	 * Constructor method. initialises a map of digits and operators
+	 */
 	public CalculationUtils(ApDriver ad){
 		this.ad = ad;
 		digits = setupNumericalInputFields();
@@ -30,6 +40,9 @@ public class CalculationUtils {
 	
 	/**
 	 * @param value
+	 * 		the array of single characters representing the data to be entered into the calculator
+	 * 
+	 * Iterates through an array of characters and invokes the corresponding button for each in turn within the calculator
 	 */
 	public void enterValues(char[] value){
 		String inputString = "";
@@ -50,7 +63,12 @@ public class CalculationUtils {
 	
 	/**
 	 * @param input
-	 * @return
+	 * 		String to be converted to a char array
+	 * @return char[]
+	 * 		of the String passed to the method
+	 * 
+	 * Creates a Char Array of the passed String
+	 * 
 	 */
 	public char[] getDataInputAsArray(String input){
 		return input.toCharArray();
@@ -58,6 +76,8 @@ public class CalculationUtils {
 	
 	/**
 	 * @param operator
+	 * 
+	 * Invokes the corresponding operator within the calculator application
 	 */
 	public void invokeOperator(int operator){
 		ad.log().logStepTrace("Invoking Operator");
@@ -89,10 +109,16 @@ public class CalculationUtils {
 		ad.log().logStepTrace("Invoked Operator: " + opStr);
 	}
 	
-	public void invokeEquals(BasePageObject page){
+	/**
+	 * Invokes the '=' button within the calculator
+	 */
+	public void invokeEquals(){
 		invokeOperator(EQL_OPERATOR);
 	}
 	
+	/**
+	 * Invokes the 'C' button within the calculator
+	 */
 	public void invokeClear(){
 		ad.log().logStepTrace("Invoking Clear Button");
 		
@@ -100,7 +126,9 @@ public class CalculationUtils {
 	}
 	
 	/**
-	 * @return
+	 * @return Map<String,By> a map of digit identifiers
+	 * 
+	 * builds a map of identifiers for digit buttons within the calculator application
 	 */
 	public Map<String,By> setupNumericalInputFields(){
 		Map<String,By> digits = new HashMap<String,By>();
@@ -121,7 +149,9 @@ public class CalculationUtils {
 	}
 	
 	/**
-	 * @return
+	 * @return Map<String,By> a map of operator identifiers
+	 * 
+	 * builds a map of identifiers for operator buttons within the calculator application
 	 */
 	public Map<String,By> setupOperatorFields(){
 		Map<String,By> operators = new HashMap<String,By>();

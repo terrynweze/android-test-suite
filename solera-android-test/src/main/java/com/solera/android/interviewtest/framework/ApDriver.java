@@ -54,28 +54,28 @@ public class ApDriver {
 	}
 
 	/**
-	 * WebDriver object backing this SeHelper object;
+	 * WebDriver object backing this ApDriver object;
 	 */
 	public WebDriver driver() {
 		return driver;
 	}
 
 	/**
-	 * Element object backing this SeHelper object;
+	 * Element object backing this ApDriver object;
 	 */
 	public Element element() {
 		return element;
 	}
 
 	/**
-	 * Verification object backing this SeHelper object;
+	 * Verification object backing this ApDriver object;
 	 */
 	public Verification verify() {
 		return verification;
 	}
 	
 	/**
-	 * Log object backing this SeHelper object;
+	 * Log object backing this ApDriver object;
 	 */
 	public Log log() {
 		return log;

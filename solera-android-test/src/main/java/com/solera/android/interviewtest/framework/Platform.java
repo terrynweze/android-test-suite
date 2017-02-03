@@ -4,7 +4,7 @@ public class Platform {
 	private ApDriver ad;
 
 	/**
-	 * Supported Browsers
+	 * Supported Platforms
 	 */
 	public static enum Platforms {
 		Android, iOS
@@ -15,9 +15,7 @@ public class Platform {
 	}
 
 	/**
-	 * Close browser and browser session.
-	 * <p/>
-	 * !! Should be called after all tests !!
+	 * Close application and test session.
 	 */
 	public void quit() {
 		ad.driver().quit();

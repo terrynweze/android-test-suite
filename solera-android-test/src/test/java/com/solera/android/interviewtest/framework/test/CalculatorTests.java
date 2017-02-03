@@ -24,9 +24,13 @@ public class CalculatorTests extends BaseTest {
 	 */
 	@Test(description = "", dataProvider = "DefaultDataProvider", groups = { "sanity" })
 	public void addingTwoValuesProducesCorrectResult(ApDriver ad) {
+		// writes to the html report (Provides the test platform, os version and name details)
 		ad.log().logTestName(ad.currentPlatform().toString() + ": " + SystemProperties.getOsVersions() + ": ","Adding Two Values Produces Correct Result");
-		CalculatorPage calculatorPage = new CalculatorPage(ad);
 		
+		// create a CalculatorPage object to start testing from
+		CalculatorPage calculatorPage = new CalculatorPage(ad);
+
+		// Tests are written in a given when then format. Methods return the page that is expected to be seen after the method completes
 		calculatorPage.givenIAmViewingTheCalculatorApp()
 			.whenIAdd2PositiveNumbersTogether("5","10")
 			.whenIInvokeTheEqualsButton()
@@ -53,6 +57,7 @@ public class CalculatorTests extends BaseTest {
 	@Test(description = "", dataProvider = "DefaultDataProvider", groups = { "sanity" })
 	public void partialClearCalculationWorksAsExpected(ApDriver ad) {
 		ad.log().logTestName(ad.currentPlatform().toString() + ": " + SystemProperties.getOsVersions() + ": ","Partial Clear Calculation Works As Expected");
+		
 		CalculatorPage calculatorPage = new CalculatorPage(ad);
 		
 		calculatorPage.givenIAmViewingTheCalculatorApp()
@@ -74,13 +79,14 @@ public class CalculatorTests extends BaseTest {
 	 * 1. Enters A Value
 	 * 2. Invokes the '-' button
 	 * 3. Enters A Value that is greater than the first value entered
-	 * 4. Verifys that the outputted result is the correct value for the calculation conducted
-	 * 5. Verifys that the outputted result starts with a '-'.
+	 * 4. Verifies that the outputted result is the correct value for the calculation conducted
+	 * 5. Verifies that the outputted result starts with a '-'.
 	 * 
 	 */
 	@Test(description = "", dataProvider = "DefaultDataProvider", groups = { "sanity" })
 	public void negativeResultsDisplayAsExpected(ApDriver ad) {
 		ad.log().logTestName(ad.currentPlatform().toString() + ": " + SystemProperties.getOsVersions() + ": ","Negative Results Display As Expected");
+		
 		CalculatorPage calculatorPage = new CalculatorPage(ad);
 		
 		calculatorPage.givenIAmViewingTheCalculatorApp()
@@ -109,6 +115,7 @@ public class CalculatorTests extends BaseTest {
 	@Test(description = "", dataProvider = "DefaultDataProvider", groups = { "sanity" })
 	public void enteringValuesAfterACalculationStartsAFreshCalculation(ApDriver ad) {
 		ad.log().logTestName(ad.currentPlatform().toString() + ": " + SystemProperties.getOsVersions() + ": ","Entering Values After A Calculation Starts A Fresh Calculation");
+		
 		CalculatorPage calculatorPage = new CalculatorPage(ad);
 		
 		String inputVal = "22";
@@ -121,18 +128,26 @@ public class CalculatorTests extends BaseTest {
 	
 	/**
 	 * @param driver driver object used to interact with the application UI
+	 * 
+	 * Tests that multiplications using values that contain decimal points displays the correct results
+	 * 
+	 * Steps:
+	 * 1. Enters the value 7.5
+	 * 2. Invokes the '*' button
+	 * 3. Enters the value 2.3
+	 * 4. Invokes the '=' button
+	 * 5. Verifies that the output field displays the result as 17.25
+	 * 
 	 */
 	@Test(description = "", dataProvider = "DefaultDataProvider", groups = { "sanity" })
 	public void multiplyingTwoValuesWithDecimalsProducesCorrectResult(ApDriver ad) {
 		ad.log().logTestName(ad.currentPlatform().toString() + ": " + SystemProperties.getOsVersions() + ": ","Multiplying Two Values With Decimals Produces Correct Result");
+		
 		CalculatorPage calculatorPage = new CalculatorPage(ad);
 		
 		calculatorPage.givenIAmViewingTheCalculatorApp()
 			.whenIMultiply2PositiveNumbersTogether("7.5","2.3")
 			.whenIInvokeTheEqualsButton()
-			.thenTheOutputtedResultIs("17.25");
-		
+			.thenTheOutputtedResultIs("17.25");	
 	}
-	
-
 }
