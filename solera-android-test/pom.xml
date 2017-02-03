@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.solera.android.test</groupId>
+	<artifactId>solera-android-test</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>solera-android-test</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<jdk.version>1.8</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<testng.version>6.8</testng.version>
+		<selenium.version>2.49.1</selenium.version>
+		<surefire.version>2.19.1</surefire.version>
+		<maven.compiler.version>3.0</maven.compiler.version>
+		<reportng.version>1.1.3</reportng.version>
+		<guice.version>3.0</guice.version>
+		
+		<platform>Android</platform>
+		
+		<!-- The values for <os.version> & <device.name> should be changed to match the emulators/devices being tested against. -->
+		<os.version>6.0</os.version>
+		<device.name>SamsungGalaxyS6-6.0.0</device.name>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/test/resources/</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>false</showWarnings>
+					<argLine>-Xms512m -Xmx1024m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.version}</version>
+				<executions>
+                    <execution>         
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+					<systemPropertyVariables>
+						<platform>${platform}</platform>
+						<osVersion>${os.version}</osVersion>
+						<deviceName>${device.name}</deviceName>
+					</systemPropertyVariables>
+					<reportsDirectory>target/</reportsDirectory>
+					<properties>
+						<property>
+							<name>usedefaultlisteners</name>
+							<value>false</value>
+						</property>
+						<property>
+							<name>listener</name>
+							<value>org.uncommons.reportng.HTMLReporter,
+								org.uncommons.reportng.JUnitXMLReporter</value>
+						</property>
+					</properties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.uncommons</groupId>
+			<artifactId>reportng</artifactId>
+			<version>${reportng.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.testng</groupId>
+					<artifactId>testng</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>java-net</id>
+			<url>http://download.java.net/maven/2</url>
+		</repository>
+	</repositories>
+</project>
